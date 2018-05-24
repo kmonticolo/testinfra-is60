@@ -5,6 +5,10 @@ def test_uname_output(Command):
     assert command.stdout.rstrip() == 'Linux'
     assert command.rc == 0
 
+def test_NTP_ntpstat(Command):
+    command = Command('ntpstat')
+    assert command.rc == 0
+
 def test_root_user(host):
     user = host.user("root")
     assert user.exists
@@ -72,6 +76,13 @@ def test_drbd_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
+def test_drbd_status(Command):
+    command = Command('service drbd status')
+    assert command.rc == 0
+
+def test_drbdadm_cstate(Command):
+    command = Command('drbdadm cstate all')
+    assert command.rc == 0
 
 def test_drbd_package(host):
     package= host.package("drbd83-8.3.8-1.el5.centos")
