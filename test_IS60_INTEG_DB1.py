@@ -5,9 +5,16 @@ def test_uname_output(Command):
     assert command.stdout.rstrip() == 'Linux'
     assert command.rc == 0
 
-def test_root_user_exists(User):
-    user = User('root')
+def test_root_user(host):
+    user = host.user("root")
     assert user.exists
+    assert user.uid == 0
+    assert user.gid == 0
+    assert user.name == "root"
+    assert user.group == "root"
+    assert user.groups == [ "root", "bin", "daemon", "sys", "adm", "disk", "wheel" ]
+    assert user.shell == "/bin/bash"
+    assert user.home == "/root"
 
 def test_seachange_user(host):
     user = host.user("seachange")
@@ -16,12 +23,9 @@ def test_seachange_user(host):
     assert user.gid == 500
     assert user.name == "seachange"
     assert user.group == "seachange"
-    assert user.groups == ["seachange", "wheel", "haclient" ]
+    assert user.groups == [ "seachange", "wheel", "haclient" ]
     assert user.shell == "/bin/bash"
     assert user.home == "/home/seachange"
-
-    #assert user.groups == "haclient"   
-
 
 def test_mysql_user(host):
     user = host.user("mysql")
