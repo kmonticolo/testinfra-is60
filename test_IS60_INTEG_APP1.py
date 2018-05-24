@@ -31,19 +31,14 @@ def test_seachange_user(host):
     assert user.shell == "/bin/bash"
     assert user.home == "/home/seachange"
 
-
-
-
 def test_seachange_group_exists(Group):
     group = Group('seachange')
     assert group.exists
 
-
-
-
-
-
-
+def test_zabbix_agent_service_exists(host):
+    service = host.service("zabbix-agent")
+    assert service.is_running
+    assert service.is_enabled
 
 def test_ssh_socket(host):
     listening = host.socket.get_listening_sockets()
@@ -57,7 +52,7 @@ def test_ssh_socket(host):
         socket = host.socket(spec)
         assert socket.is_listening
 
-def test_cassandra_socket(host):
+def test_app_socket(host):
     listening = host.socket.get_listening_sockets()
     for spec in (
         "tcp://127.0.0.1:32000",

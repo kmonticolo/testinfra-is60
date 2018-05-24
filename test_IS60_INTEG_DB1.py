@@ -65,6 +65,11 @@ def test_mysql_group_exists(Group):
     group = Group('mysql')
     assert group.exists
 
+def test_zabbix_agent_service_exists(host):
+    service = host.service("zabbix-agent")
+    assert service.is_running
+    assert service.is_enabled
+
 def test_cassandra_service_exists(host):
     service = host.service("cassandra")
     assert service.is_running
