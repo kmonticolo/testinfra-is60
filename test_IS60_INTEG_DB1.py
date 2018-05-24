@@ -77,11 +77,11 @@ def test_drbd_service_exists(host):
     assert service.is_enabled
 
 def test_drbd_status(Command):
-    command = Command('service drbd status')
+    command = Command('/sbin/service drbd status')
     assert command.rc == 0
 
 def test_drbdadm_cstate(Command):
-    command = Command('drbdadm cstate all')
+    command = Command('/sbin/drbdadm cstate all')
     assert command.rc == 0
 
 def test_drbd_package(host):
