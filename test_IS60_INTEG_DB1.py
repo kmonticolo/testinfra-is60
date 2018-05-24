@@ -28,6 +28,18 @@ def test_seachange_user(host):
 
     #assert user.groups == "haclient"   
 
+
+def test_mysql_user(host):
+    user = host.user("mysql")
+    assert user.exists
+    assert user.uid == 102
+    assert user.gid == 104
+    assert user.name == "mysql"
+    assert user.group == "mysql"
+    assert user.groups == ["mysql"]
+    assert user.shell == "/bin/bash"
+    assert user.home == "/var/lib/mysql"
+
 def test_mysql_user_exists(User):
     user = User('mysql')
     assert user.exists
