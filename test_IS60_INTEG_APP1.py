@@ -40,6 +40,11 @@ def test_zabbix_agent_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
+def test_infusion_service_exists(host):
+    service = host.service("infusion")
+    assert service.is_running
+    assert service.is_enabled
+
 def test_ssh_socket(host):
     listening = host.socket.get_listening_sockets()
     for spec in (
