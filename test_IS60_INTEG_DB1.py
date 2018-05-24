@@ -53,7 +53,6 @@ def test_hacluster_user(host):
     assert user.shell == "/bin/bash"
     assert user.home == "/var/lib/heartbeat/cores/hacluster"
 
-
 def test_haclient_group_exists(Group):
     group = Group('haclient')
     assert group.exists
@@ -75,6 +74,10 @@ def test_drbd_service_exists(host):
     service = host.service("drbd")
     assert service.is_running
     assert service.is_enabled
+
+def test_cassandra_commitlog_status(Command):
+    command = Command('mount |grep /dev/sdd.*/var/data/cassandra/commitlog')
+    assert command.rc == 0
 
 def test_drbd_status(Command):
     command = Command('/sbin/service drbd status')
