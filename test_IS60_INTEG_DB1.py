@@ -130,6 +130,12 @@ def test_cassandra_socket(host):
         socket = host.socket(spec)
         assert socket.is_listening
 
+def test_cassandra_cli_getInfusionInfo(Command):
+    command = Command('/seachange/local/utils/./getInfusionInfo.sh CG')
+    assert command.rc == 0
+
+
+
 
 
 
@@ -181,3 +187,7 @@ def test_cassandra_socket(host):
 #tcp        0      0 :::6001                     :::*                        LISTEN      5440/Xvnc
 #tcp        0      0 :::22                       :::*                        LISTEN      5046/sshd
 #
+# cronO
+#cron usera seachange cassandry
+#10 1 * * 6 /seachange/local/apache-cassandra-latest/nodetool -h 128.168.160.190 -p 11000 repair -pr >> /var/log/seachange/repair.log
+
