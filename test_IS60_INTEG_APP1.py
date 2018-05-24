@@ -40,6 +40,16 @@ def test_zabbix_agent_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
+#def test_rhq_agent_service_exists(host):
+#    service = host.service("rhq-agent")
+#    assert service.is_running
+#    assert service.is_enabled
+
+def test_rhq_agent_running(Command):
+    command = Command('sudo service rhq-agent status')
+    assert command.rc == 0
+
+
 def test_infusion_service_exists(host):
     service = host.service("infusion")
     assert service.is_running
