@@ -9,12 +9,6 @@ def test_root_user_exists(User):
     user = User('root')
     assert user.exists
 
-#def test_seachange_user_exists(User):
-#    user = User('seachange')
-#    assert user.exists
-#    assert user.group == "seachange"   
-#    assert user.groups == ['wheel', 'seachange', 'haclient']
-
 def test_seachange_user(host):
     user = host.user("seachange")
     assert user.exists
@@ -109,6 +103,28 @@ def test_cassandra_nodetool(Command):
     command = Command('/seachange/local/apache-cassandra-latest/bin/nodetool -h localhost  -p 11000 statusbinary')
     assert command.stdout.rstrip() == 'running'
     assert command.rc == 0
+
+
+def test_ssh_socket(host):
+    listening = host.socket.get_listening_sockets()
+    for spec in (
+        "tcp://22",
+        "tcp://0.0.0.0:22",
+        "tcp://127.0.0.1:22",
+        "tcp://:::22",
+        "tcp://::1:22",
+    ):
+        socket = host.socket(spec)
+        assert socket.is_listening
+
+def test_cassandra_socket(host):
+    listening = host.socket.get_listening_sockets()
+    for spec in (
+        "tcp://0.0.0.0:11000",
+        "tcp://127.0.0.1:32000",
+    ):
+        socket = host.socket(spec)
+        assert socket.is_listening
 
 
 
