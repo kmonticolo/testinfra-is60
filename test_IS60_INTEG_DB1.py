@@ -52,12 +52,6 @@ def test_hacluster_user(host):
     assert user.home == "/var/lib/heartbeat/cores/hacluster"
 
 
-
-def test_hacluster_user_exists(User):
-    user = User('hacluster')
-    assert user.exists
-    assert user.group == "haclient"   
-
 def test_haclient_group_exists(Group):
     group = Group('haclient')
     assert group.exists
@@ -70,12 +64,6 @@ def test_mysql_group_exists(Group):
     group = Group('mysql')
     assert group.exists
 
-
-
-
-
-# uslugi chkconfig --list|grep on
-# cassandra conman ? drbd heartbeat 
 def test_cassandra_service_exists(host):
     service = host.service("cassandra")
     assert service.is_running
@@ -86,28 +74,45 @@ def test_drbd_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
-#procesy heartbeat
+
+def test_drbd_package(host):
+    package= host.package("drbd83-8.3.8-1.el5.centos")
+    assert package.is_installed
+    assert package.version.startswith("8.3.")
+
+def test_kmod_package(host):
+    package= host.package("kmod-drbd83-8.3.8-1.el5.centos")
+    assert package.is_installed
+    assert package.version.startswith("8.3.")
+
+def test_mysqlserver_package(host):
+    package= host.package("MySQL-server-enterprise-5.1.37-0.rhel5")
+    assert package.is_installed
+    assert package.version.startswith("5.1.37")
+
+def test_mysqlquery_package(host):
+    package= host.package("mysql-query-browser-5.0r12-1rhel4")
+    assert package.is_installed
+    assert package.version.startswith("5.0r12")
+
+def test_pgsql_package(host):
+    package= host.package("postgresql-libs-8.1.22-1.el5_5.1")
+    assert package.is_installed
+    assert package.version.startswith("8.1.22")
+
+def test_mysqladministrator_package(host):
+    package= host.package("mysql-administrator-5.0r12-1rhel4")
+    assert package.is_installed
+    assert package.version.startswith("5.0")
+
+def test_cassandra_nodetool(Command):
+    command = Command('/seachange/local/apache-cassandra-latest/bin/nodetool -h localhost  -p 11000 statusbinary')
+    assert command.stdout.rstrip() == 'running'
+    assert command.rc == 0
 
 
 
-# procesy
-# /seachange/local/apache-cassandra-1.2.18/bin/./wrapper /seachange/local/apache-cassandra-1.2.18/bin/./cassandra_wrapper.conf wrapper.syslog.ident=cassandra wrapper.pidfile=/seachange/local/apache-cassandra-1.2.18/bin/./cassandra.pid wrapper.name=cassandra wrapper.displayname=Cassandra wrapper.daemonize=TRUE wrapper.script.version=3.5.26
 
-# pstree
-#
-#
-#java
-#
-# grupa procesow heartbeat
-#
-#
-#
-#userzy
-#[root@IS60_INTEG_DB1 seachange]# grep sh$ /etc/passwd
-#root:x:0:0:root:/root:/bin/bash
-#seachange:x:500:500::/home/seachange:/bin/bash
-#mysql:x:102:104:MySQL server:/var/lib/mysql:/bin/bash
-#hacluster:x:498:496::/var/lib/heartbeat/cores/hacluster:/bin/bash
 #
 #paczki
 #drbd83-8.3.8-1.el5.centos
@@ -130,4 +135,29 @@ def test_drbd_service_exists(host):
 #drbd-overview
 #
 # /seachange/local/apache-cassandra-latest/bin/nodetool -h localhost  -p 11000 status
+#
+#
+#netstat 
+#[root@IS60_INTEG_DB1 seachange]# netstat -alnp|grep LIST
+#tcp        0      0 127.0.0.1:2208              0.0.0.0:*                   LISTEN      5028/hpiod
+#tcp        0      0 127.0.0.1:32000             0.0.0.0:*                   LISTEN      4651/java
+#tcp        0      0 0.0.0.0:10050               0.0.0.0:*                   LISTEN      5229/zabbix_agentd
+#tcp        0      0 128.168.160.190:16163       0.0.0.0:*                   LISTEN      5498/java
+#tcp        0      0 128.168.160.190:9160        0.0.0.0:*                   LISTEN      4651/java
+#tcp        0      0 0.0.0.0:5801                0.0.0.0:*                   LISTEN      5440/Xvnc
+#tcp        0      0 0.0.0.0:5900                0.0.0.0:*                   LISTEN      6574/Xorg
+#tcp        0      0 0.0.0.0:5901                0.0.0.0:*                   LISTEN      5440/Xvnc
+#tcp        0      0 0.0.0.0:53103               0.0.0.0:*                   LISTEN      4651/java
+#tcp        0      0 0.0.0.0:111                 0.0.0.0:*                   LISTEN      3584/portmap
+#tcp        0      0 0.0.0.0:6001                0.0.0.0:*                   LISTEN      5440/Xvnc
+#tcp        0      0 128.168.160.190:9042        0.0.0.0:*                   LISTEN      4651/java
+#tcp        0      0 0.0.0.0:851                 0.0.0.0:*                   LISTEN      3637/rpc.statd
+#tcp        0      0 127.0.0.1:631               0.0.0.0:*                   LISTEN      5055/cupsd
+#tcp        0      0 128.168.160.190:7000        0.0.0.0:*                   LISTEN      4651/java
+#tcp        0      0 0.0.0.0:5560                0.0.0.0:*                   LISTEN      5448/mgmtd
+#tcp        0      0 0.0.0.0:11000               0.0.0.0:*                   LISTEN      4651/java
+#tcp        0      0 127.0.0.1:2207              0.0.0.0:*                   LISTEN      5033/python
+#tcp        0      0 :::10050                    :::*                        LISTEN      5229/zabbix_agentd
+#tcp        0      0 :::6001                     :::*                        LISTEN      5440/Xvnc
+#tcp        0      0 :::22                       :::*                        LISTEN      5046/sshd
 #
