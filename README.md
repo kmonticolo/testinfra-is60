@@ -14,3 +14,4 @@ for APP: `py.test test_IS60_INTEG_APP1.py --ssh-config=/home/kamil/.ssh/config -
 where /home/kamil/.ssh/config is configuration which allows you to connect to IS60 site
 
 
+![screen](screenshots/Screenshot from 2018-05-24 16-27-02.png)
