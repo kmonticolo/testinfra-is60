@@ -40,10 +40,18 @@ def test_mysql_user(host):
     assert user.shell == "/bin/bash"
     assert user.home == "/var/lib/mysql"
 
-def test_mysql_user_exists(User):
-    user = User('mysql')
+def test_hacluster_user(host):
+    user = host.user("hacluster")
     assert user.exists
-    assert user.group == "mysql"   
+    assert user.uid == 498
+    assert user.gid == 496
+    assert user.name == "hacluster"
+    assert user.group == "haclient"
+    assert user.groups == ["haclient"]
+    assert user.shell == "/bin/bash"
+    assert user.home == "/var/lib/heartbeat/cores/hacluster"
+
+
 
 def test_hacluster_user_exists(User):
     user = User('hacluster')
