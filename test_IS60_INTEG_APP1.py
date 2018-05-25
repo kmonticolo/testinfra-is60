@@ -56,47 +56,47 @@ def test_infusion_service_exists(host):
     assert service.is_enabled
 
 def test_ads_package(host):
-    package= host.package("ads-6.0.0-0769")
+    package= host.package("ads-6.0.0")
     assert package.is_installed
     assert package.version.startswith("6.0.0")
 
 def test_usm_ads_strmanager_package(host):
-    package= host.package("usm-ads-streamingstoragemanager-2.0.1-0955")
+    package= host.package("usm-ads-streamingstoragemanager-2.0.1")
     assert package.is_installed
     assert package.version.startswith("2.0.1")
 
 def test_usm_ads_package(host):
-    package= host.package("usm-ads-2.0.1-0955")
+    package= host.package("usm-ads-2.0.1")
     assert package.is_installed
     assert package.version.startswith("2.0.1")
 
 def test_usm_ads_mcast_package(host):
-    package= host.package("usm-ads-mcastreamer-2.0.1-0955")
+    package= host.package("usm-ads-mcastreamer-2.0.1")
     assert package.is_installed
     assert package.version.startswith("2.0.1")
 
 def test_pcs_package(host):
-    package= host.package("pcs-6.0.0-0810")
+    package= host.package("pcs-6.0.0")
     assert package.is_installed
     assert package.version.startswith("6.0.0")
 
 def test_adr_scripts_package(host):
-    package= host.package("adrenalin-deploy-scripts-for-IS60-2.3.0-0674")
+    package= host.package("adrenalin-deploy-scripts-for-IS60-2.3.0")
     assert package.is_installed
     assert package.version.startswith("2.3.0")
 
 def test_adr_util_package(host):
-    package= host.package("adrenalin-utilities-for-IS60-2.3.0-0674")
+    package= host.package("adrenalin-utilities-for-IS60-2.3.0")
     assert package.is_installed
     assert package.version.startswith("2.3.0")
 
 def test_adr_package(host):
-    package= host.package("adr-6.0.0-0751")
+    package= host.package("adr-6.0.0")
     assert package.is_installed
     assert package.version.startswith("6.0.0")
 
 def test_rsyslog_package(host):
-    package= host.package("seachange-rsyslog-client-for-IS60-2.3.0-0674")
+    package= host.package("seachange-rsyslog-client-for-IS60-2.3.0")
     assert package.is_installed
     assert package.version.startswith("2.3.0")
 
