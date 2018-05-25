@@ -75,32 +75,9 @@ def test_cassandra_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
-def test_drbd_service_exists(host):
-    service = host.service("drbd")
-    assert service.is_running
-    assert service.is_enabled
-
 def test_cassandra_commitlog_status(Command):
     command = Command('mount |grep /dev/sdd.*/var/data/cassandra/commitlog')
     assert command.rc == 0
-
-def test_drbd_status(Command):
-    command = Command('/sbin/service drbd status')
-    assert command.rc == 0
-
-def test_drbdadm_cstate(Command):
-    command = Command('/sbin/drbdadm cstate all')
-    assert command.rc == 0
-
-def test_drbd_package(host):
-    package= host.package("drbd83-8.3.8-1.el5.centos")
-    assert package.is_installed
-    assert package.version.startswith("8.3.")
-
-def test_kmod_package(host):
-    package= host.package("kmod-drbd83-8.3.8-1.el5.centos")
-    assert package.is_installed
-    assert package.version.startswith("8.3.")
 
 def test_mysqlserver_package(host):
     package= host.package("MySQL-server-enterprise-5.1.37-0.rhel5")
@@ -154,26 +131,7 @@ def test_cassandra_cli_getInfusionInfo(Command):
     assert command.rc == 0
 
 
-
-
-
-
-#
-#paczki
-#drbd83-8.3.8-1.el5.centos
-#kmod-drbd83-8.3.8-1.el5.centos
-##[root@IS60_INTEG_DB1 seachange]# rpm -aq|grep -i sql
-#MySQL-server-enterprise-5.1.37-0.rhel5
-#mysql-query-browser-5.0r12-1rhel4
-#postgresql-libs-8.1.22-1.el5_5.1
-#sqlite-3.3.6-5
-#mysql-gui-tools-5.0r12-1rhel4
-#MySQL-shared-compat-5.1.37-0.rhel5
-#MySQL-client-enterprise-5.1.37-0.rhel5
-#python-sqlite-1.1.7-1.2.1
-#mysql-administrator-5.0r12-1rhel4
-#
-#
+# TODO
 #interfejsy
 #
 #komendy
@@ -181,32 +139,3 @@ def test_cassandra_cli_getInfusionInfo(Command):
 #
 # /seachange/local/apache-cassandra-latest/bin/nodetool -h localhost  -p 11000 status
 #
-#
-#netstat 
-#[root@IS60_INTEG_DB1 seachange]# netstat -alnp|grep LIST
-#tcp        0      0 127.0.0.1:2208              0.0.0.0:*                   LISTEN      5028/hpiod
-#tcp        0      0 127.0.0.1:32000             0.0.0.0:*                   LISTEN      4651/java
-#tcp        0      0 0.0.0.0:10050               0.0.0.0:*                   LISTEN      5229/zabbix_agentd
-#tcp        0      0 128.168.160.190:16163       0.0.0.0:*                   LISTEN      5498/java
-#tcp        0      0 128.168.160.190:9160        0.0.0.0:*                   LISTEN      4651/java
-#tcp        0      0 0.0.0.0:5801                0.0.0.0:*                   LISTEN      5440/Xvnc
-#tcp        0      0 0.0.0.0:5900                0.0.0.0:*                   LISTEN      6574/Xorg
-#tcp        0      0 0.0.0.0:5901                0.0.0.0:*                   LISTEN      5440/Xvnc
-#tcp        0      0 0.0.0.0:53103               0.0.0.0:*                   LISTEN      4651/java
-#tcp        0      0 0.0.0.0:111                 0.0.0.0:*                   LISTEN      3584/portmap
-#tcp        0      0 0.0.0.0:6001                0.0.0.0:*                   LISTEN      5440/Xvnc
-#tcp        0      0 128.168.160.190:9042        0.0.0.0:*                   LISTEN      4651/java
-#tcp        0      0 0.0.0.0:851                 0.0.0.0:*                   LISTEN      3637/rpc.statd
-#tcp        0      0 127.0.0.1:631               0.0.0.0:*                   LISTEN      5055/cupsd
-#tcp        0      0 128.168.160.190:7000        0.0.0.0:*                   LISTEN      4651/java
-#tcp        0      0 0.0.0.0:5560                0.0.0.0:*                   LISTEN      5448/mgmtd
-#tcp        0      0 0.0.0.0:11000               0.0.0.0:*                   LISTEN      4651/java
-#tcp        0      0 127.0.0.1:2207              0.0.0.0:*                   LISTEN      5033/python
-#tcp        0      0 :::10050                    :::*                        LISTEN      5229/zabbix_agentd
-#tcp        0      0 :::6001                     :::*                        LISTEN      5440/Xvnc
-#tcp        0      0 :::22                       :::*                        LISTEN      5046/sshd
-#
-# cronO
-#cron usera seachange cassandry
-#10 1 * * 6 /seachange/local/apache-cassandra-latest/nodetool -h 128.168.160.190 -p 11000 repair -pr >> /var/log/seachange/repair.log
-
