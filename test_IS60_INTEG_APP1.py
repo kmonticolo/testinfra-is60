@@ -112,11 +112,10 @@ def test_ssh_socket(host):
         socket = host.socket(spec)
         assert socket.is_listening
 
-def test_app_socket(host):
-    listening = host.socket.get_listening_sockets()
-    for spec in (
-        "tcp://127.0.0.1:32000",
-    ):
-        socket = host.socket(spec)
-        assert socket.is_listening
-
+#def test_app_socket(host):
+#    listening = host.socket.get_listening_sockets()
+#    for spec in (
+#        "tcp://127.0.0.1:32000",
+#    ):
+#        socket = host.socket(spec)
+#        assert socket.is_listening
