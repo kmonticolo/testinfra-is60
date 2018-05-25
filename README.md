@@ -4,8 +4,9 @@
 
 `$ pip install testinfra`
 
-its also good to install xdist plugin to speedup testing process
+its also good to install xdist plugin to speedup testing process - (103 vs 51 seconds with "-n8" parameter)
 `$ pip install pytest-xdist`
+
 
 ## execution
 
