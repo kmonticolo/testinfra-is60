@@ -4,6 +4,9 @@
 
 `$ pip install testinfra`
 
+its also good to install xdist plugin to speedup testing process
+`$ pip install pytest-xdist`
+
 ## execution
 
 for DB: `$ py.test --ssh-config=/home/kamil/.ssh/config --hosts IS60_INTEG_DB1,IS60_INTEG_DB2,IS60_INTEG_DB1,IS60_INTEG_DB3`
