@@ -75,7 +75,7 @@ def test_cassandra_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
-def test_cassandra_commitlog_status(Command):
+def test_cassandra_commitlog_on_other_disk(Command):
     command = Command('mount |grep /dev/sdd.*/var/data/cassandra/commitlog')
     assert command.rc == 0
 
