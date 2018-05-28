@@ -35,6 +35,11 @@ def test_seachange_group_exists(Group):
     group = Group('seachange')
     assert group.exists
 
+def test_ntpd_service_exists(host):
+    service = host.service("ntpd")
+    assert service.is_running
+    assert service.is_enabled
+
 def test_zabbix_agent_service_exists(host):
     service = host.service("zabbix-agent")
     assert service.is_running

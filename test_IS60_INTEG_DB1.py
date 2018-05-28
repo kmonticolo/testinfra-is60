@@ -70,6 +70,11 @@ def test_zabbix_agent_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
+def test_ntpd_service_exists(host):
+    service = host.service("ntpd")
+    assert service.is_running
+    assert service.is_enabled
+
 def test_cassandra_service_exists(host):
     service = host.service("cassandra")
     assert service.is_running
