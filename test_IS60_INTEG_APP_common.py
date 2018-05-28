@@ -82,11 +82,6 @@ def test_infusion_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
-def test_httpd_service_exists(host):
-    service = host.service("httpd")
-    assert service.is_running
-    assert service.is_enabled
-
 def test_apachectl_syntax_output(Command):
     command = Command('/usr/sbin/apachectl -t')
     assert command.rc == 0
