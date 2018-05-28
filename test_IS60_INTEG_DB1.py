@@ -77,7 +77,7 @@ def test_zabbix_conf(File):
     assert zabbix_conf.user == "root"
     assert zabbix_conf.group == "root"
     assert zabbix_conf.mode == 0o644
-    assert zabbix_conf.contains("172.16.160.24")
+    assert zabbix_conf.contains("172.16.160.24") or zabbix_conf.contains("128.168.160.24")
 
 def test_zabbix_agent_service_exists(host):
     service = host.service("zabbix-agent")
