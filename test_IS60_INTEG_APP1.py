@@ -158,6 +158,14 @@ def test_rsyslog_package(host):
     assert package.is_installed
     assert package.version.startswith("2.3.0")
 
+def tomcat_spring_scc_xml(File):
+    scc= File("/seachange/local/apache-tomcat-6.0.32/webapps/pcs/WEB-INF/classes/spring-scc.xml")
+    assert scc.user == "seachange"
+    assert scc.group == "root"
+    assert scc.mode == 0o644
+    assert scc.contains("tv.seachange.advads.scc.StreamControlClientContextEmulator")
+    assert scc.contains("tv.seachange.advads.scc.manager.SessionCacheManagerEmulator")
+
 def test_ssh_socket(host):
     listening = host.socket.get_listening_sockets()
     for spec in (
