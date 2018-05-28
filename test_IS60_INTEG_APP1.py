@@ -47,6 +47,13 @@ def test_ntpd_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
+def zabbix_conf(File):
+    zabbix_conf= File("/etc/ntp.conf")
+    assert zabbix_conf.user == "root"
+    assert zabbix_conf.group == "root"
+    assert zabbix_conf.mode == 0o644
+    assert zabbix_conf.contains("172.16.160.24")
+
 def test_zabbix_agent_service_exists(host):
     service = host.service("zabbix-agent")
     assert service.is_running
