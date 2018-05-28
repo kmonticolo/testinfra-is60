@@ -47,8 +47,8 @@ def test_ntpd_service_exists(host):
     assert service.is_running
     assert service.is_enabled
 
-def zabbix_conf(File):
-    zabbix_conf= File("/etc/ntp.conf")
+def test_zabbix_conf(File):
+    zabbix_conf= File("/etc/zabbix/zabbix_agentd.conf")
     assert zabbix_conf.user == "root"
     assert zabbix_conf.group == "root"
     assert zabbix_conf.mode == 0o644
@@ -165,10 +165,10 @@ def test_rsyslog_package(host):
     assert package.is_installed
     assert package.version.startswith("2.3.0")
 
-def tomcat_spring_scc_xml(File):
+def test_tomcat_spring_scc_xml(File):
     scc= File("/seachange/local/apache-tomcat-6.0.32/webapps/pcs/WEB-INF/classes/spring-scc.xml")
     assert scc.user == "seachange"
-    assert scc.group == "root"
+    assert scc.group == "seachange"
     assert scc.mode == 0o644
     assert scc.contains("tv.seachange.advads.scc.StreamControlClientContextEmulator")
     assert scc.contains("tv.seachange.advads.scc.manager.SessionCacheManagerEmulator")
