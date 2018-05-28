@@ -76,6 +76,36 @@ def test_apachectl_syntax_output(Command):
     command = Command('/usr/sbin/apachectl -t')
     assert command.rc == 0
 
+def test_tomcat_package(host):
+    package= host.package("apache-tomcat-6.0.32-jdk6.1054")
+    assert package.is_installed
+    assert package.version.startswith("6.0.32")
+
+def test_sun_jdk_package(host):
+    package= host.package("sun-jdk-1.6.0_21-2003")
+    assert package.is_installed
+    assert package.version.startswith("1.6.0")
+
+def test_sun_jre_package(host):
+    package= host.package("sun-jre-1.6.0.24-jdk6.1138")
+    assert package.is_installed
+    assert package.version.startswith("1.6.0")
+
+def test_jboss_package(host):
+    package= host.package("jboss4-4.2.3.GA-jdk6")
+    assert package.is_installed
+    assert package.version.startswith("4.2.3")
+
+def test_jboss_jre_package(host):
+    package= host.package("jboss-jre-1.6.0.24-jdk6")
+    assert package.is_installed
+    assert package.version.startswith("1.6.0")
+
+def test_jboss_wrapper_package(host):
+    package= host.package("jboss-wrapper-5.1.1-jdk6")
+    assert package.is_installed
+    assert package.version.startswith("5.1.1")
+
 def test_ads_package(host):
     package= host.package("ads-6.0.0")
     assert package.is_installed
