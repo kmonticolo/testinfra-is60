@@ -49,6 +49,13 @@ def test_rhq_agent_running(Command):
     command = Command('sudo service rhq-agent status')
     assert command.rc == 0
 
+def test_network_configured_devices(Command):
+    command = Command('/etc/init.d/network status|grep -A1 ^Configured|grep "lo eth0 eth1 eth2"')
+    assert command.rc == 0
+
+def test_network_currently_active_devices(Command):
+    command = Command('/etc/init.d/network status|grep -A1 ^Currently\ active|grep "lo eth0 eth1 eth2"')
+    assert command.rc == 0
 
 def test_infusion_service_exists(host):
     service = host.service("infusion")
