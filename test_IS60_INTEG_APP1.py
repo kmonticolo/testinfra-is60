@@ -173,6 +173,24 @@ def test_tomcat_spring_scc_xml(File):
     assert scc.contains("tv.seachange.advads.scc.StreamControlClientContextEmulator")
     assert scc.contains("tv.seachange.advads.scc.manager.SessionCacheManagerEmulator")
 
+def test_adr_war(File):
+    adr= File("/seachange/local/adr-latest/webapps/adr.war")
+    assert adr.user == "seachange"
+    assert adr.group == "root"
+    assert adr.mode == 0o644
+
+def test_ads_war(File):
+    ads= File("/seachange/local/ads-latest/webapps/ads.war")
+    assert ads.user == "seachange"
+    assert ads.group == "root"
+    assert ads.mode == 0o644
+
+def test_pcs_war(File):
+    scc= File("/seachange/local/pcs-latest/webapps/pcs.war")
+    assert scc.user == "seachange"
+    assert scc.group == "root"
+    assert scc.mode == 0o644
+
 def test_ssh_socket(host):
     listening = host.socket.get_listening_sockets()
     for spec in (
