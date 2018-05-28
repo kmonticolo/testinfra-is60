@@ -20,3 +20,10 @@ def test_kmod_package(host):
     package= host.package("kmod-drbd83-8.3.8-1.el5.centos")
     assert package.is_installed
     assert package.version.startswith("8.3.")
+
+def drbd_zabbix_conf(File):
+    drbd= File("/etc/zabbix/zabbix_agentd.d/userparameter_drbd.conf")
+    assert drbd.user == "root"
+    assert drbd.group == "root"
+    assert drbd.mode == 0o644
+    assert drbd.contains("drbdadm")
