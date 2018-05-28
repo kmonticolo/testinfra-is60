@@ -5,6 +5,13 @@ def test_uname_output(Command):
     assert command.stdout.rstrip() == 'Linux'
     assert command.rc == 0
 
+def test_ntp_conf(File):
+    ntp_conf= File("/etc/ntp.conf")
+    assert ntp_conf.user == "root"
+    assert ntp_conf.group == "root"
+    assert ntp_conf.mode == 0o644
+    assert ntp_conf.contains("server 128.168.160.95")
+
 def test_NTP_ntpstat(Command):
     command = Command('ntpstat')
     assert command.rc == 0
@@ -64,6 +71,13 @@ def test_seachange_group_exists(Group):
 def test_mysql_group_exists(Group):
     group = Group('mysql')
     assert group.exists
+
+def test_zabbix_conf(File):
+    zabbix_conf= File("/etc/zabbix/zabbix_agentd.conf")
+    assert zabbix_conf.user == "root"
+    assert zabbix_conf.group == "root"
+    assert zabbix_conf.mode == 0o644
+    assert zabbix_conf.contains("172.16.160.24")
 
 def test_zabbix_agent_service_exists(host):
     service = host.service("zabbix-agent")
