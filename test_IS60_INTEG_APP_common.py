@@ -5,6 +5,17 @@ def test_uname_output(Command):
     assert command.stdout.rstrip() == 'Linux'
     assert command.rc == 0
 
+def test_resolv(File):
+    resolv= File("/etc/resolv.conf")
+    assert resolv.user == "root"
+    assert resolv.group == "root"
+    assert resolv.mode == 0o644
+    assert resolv.contains("nameserver 128.168.160.95")
+
+def test_visudo(Command):
+    command = Command('sudo visudo -cf /etc/sudoers')
+    assert command.rc == 0
+
 def test_ntp_conf(File):
     ntp_conf= File("/etc/ntp.conf")
     assert ntp_conf.user == "root"
