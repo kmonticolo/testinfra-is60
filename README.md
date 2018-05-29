@@ -20,4 +20,4 @@ where /home/kamil/.ssh/config is configuration which allows you to connect to IS
 it can also be run from Zabbix proxy: `# py.test test_IS60_INTEG_DB1.py --ssh-config=/root/.ssh/config --hosts 128.168.160.190`
 
 Sample screenshot:
-![screen](screenshots/Screenshot from 2018-05-25 09-23-29.png)
+![screen](testinfra-is60/screenshots/Screenshot from 2018-05-25 09-23-29.png)
