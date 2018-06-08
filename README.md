@@ -20,7 +20,6 @@ where /home/kamil/.ssh/config is configuration which allows you to connect to IS
 it can also be run from Zabbix proxy: `# py.test test_IS60_INTEG_DB1.py --ssh-config=/root/.ssh/config --hosts 128.168.160.190`
 
 content of .ssh/config:
-
 `User seachange
  StrictHostKeyChecking no`
 
