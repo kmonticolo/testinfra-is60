@@ -175,7 +175,6 @@ def test_rsyslog_package(host):
 def test_tomcat_spring_scc_xml(File):
     scc= File("/seachange/local/apache-tomcat-6.0.32/webapps/pcs/WEB-INF/classes/spring-scc.xml")
     assert scc.user == "seachange"
-    assert scc.group == "seachange"
     assert scc.mode == 0o644
     assert scc.contains("tv.seachange.advads.scc.StreamControlClientContextEmulator")
     assert scc.contains("tv.seachange.advads.scc.manager.SessionCacheManagerEmulator")
