@@ -21,18 +21,18 @@ def test_kmod_package(host):
     assert package.is_installed
     assert package.version.startswith("8.3.")
 
-def drbd_zabbix_conf(File):
+def test_drbd_zabbix_conf(File):
     drbd= File("/etc/zabbix/zabbix_agentd.d/userparameter_drbd.conf")
     assert drbd.user == "root"
     assert drbd.group == "root"
     assert drbd.mode == 0o644
     assert drbd.contains("drbdadm")
 
-def drbd_crm_verify_xml(Command):
-    command = Command('crm_verify -x /var/lib/heartbeat/crm/cib.xml')
+def test_drbd_crm_verify_xml(Command):
+    command = Command('sudo /usr/sbin/crm_verify -x /var/lib/heartbeat/crm/cib.xml')
     assert command.rc == 0
 
-def drbd_crm_verify_consistency_in_running_cluster(Command):
-    command = Command('crm_verify -L')
+def test_drbd_crm_verify_consistency_in_running_cluster(Command):
+    command = Command('sudo /usr/sbin/crm_verify -L')
     assert command.rc == 0
 
