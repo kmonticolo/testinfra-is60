@@ -31,10 +31,8 @@ def test_crm_mon_stats(File):
     assert file.user == "root"
     assert file.group == "root"
 
-
-
-#/etc/sudoers wpis zabbix  ALL=(ALL)       NOPASSWD: /sbin/drbdadm
-
-
- #odpowiednie wpisy w sudoers
+def test_sudoers(Command):
+    command = Command('sudo grep zabbix /etc/sudoers')
+    assert command.stdout.rstrip() == 'zabbix	ALL=(ALL)	NOPASSWD: /sbin/drbdadm, /usr/local/bin/check_pacemaker_actions, /usr/local/bin/crm_mon_stats.sh'
+    assert command.rc == 0
 
